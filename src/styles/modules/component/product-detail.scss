@@ -1,45 +1,333 @@
-
+@font-face {
+    font-family: 'yofont';
+    src: url('../assets/images/iconfont/iconfont2.woff') format('woff'), url('../assets/images/iconfont/iconfont2.ttf') format('truetype')
+  }
 .detail{
     width: 100%;
     height: 100%;
-    .mint-header{
-        background-color: #ffffff;
-        @include border(0 0 1px 0);
-        height: .44rem;
-        .mint-header-button{
-            flex:.1;
-        }
-        .mint-navbar .mint-tab-item{
-            padding: 0.15rem 0;
-            .mint-tab-item-label{
-                font-size: .14rem;
-                color: #666
-            }
-            &.is-selected{
-                border-bottom: 3px solid #26a2ff;
-                color: #26a2ff;
-                margin-bottom: -3px;
-            }
-        }
-        .mint-header-title{
-            flex: .5;
-            margin: 0 auto;
-            color: #666;
-        }
-        .mintui{
-            color: #8e8c8c;
-        }
-    }
-    section{
+    @include flexbox();
+    @include flex-direction(column);
+    .main{
+        @include flex();
+        width: 100%;
         overflow-y: scroll;
-        .good{
-            height: 5rem;
-        }
-        .det{
-            height: 5rem;
-        }
-        .comment{
-            height: 5rem;
+        section{
+            height: 100%;
+            .gooddetail{
+                height: 3.2rem;
+                width: 100%;
+                background: #f0f;
+                position: relative;
+                .mint-header{
+                    position: absolute;
+                    z-index: 2;
+                    overflow: hidden;
+                    width: 100%;
+                    background-color: transparent;
+                    height: .44rem;
+                    .mint-header-button{
+                        flex:.5;
+                        button{
+                            width: .24rem;
+                            height: .24rem;
+                            background: rgba(0,0,0,.3);
+                            border-radius: 100%;
+                        }
+                    }
+                    .mintui{
+                        color: #fff;
+                    }
+                }
+                .mint-swipe-item{
+                    width: 100%;
+                    img{
+                        width: 100%;
+                    }
+                    
+                }
+                span.pagenation{
+                    position: absolute;
+                    right: .2rem;
+                    bottom: .1rem;
+                    display: inline-block;
+                    background: rgba(0,0,0,.5);
+                    padding: 0 .05rem;
+                    border-radius: 10px;
+                    font-size: .1rem;
+                    color: #e0e0e0;
+                }
+                // 信息
+                .info{
+                    height: 1.1rem;
+                    background: #fff;
+                    padding: 0 .07rem;
+                    .info-name{
+                        @include flexbox();
+                        @include justify-content(space-between);
+                        @include align-items();
+                        color: #666;
+                        font-size: .1rem;
+                        height: .4rem;
+                        .name{
+                            @include flex(.9);
+                        }
+                        .share{
+                            @include flexbox();
+                            @include flex-direction(column);
+                            @include align-items();
+                            i{
+                                font-size: .18rem;
+                                color: red;
+                                height: .18rem;
+                            }
+                            b{
+                                font-size: .18rem;
+                                transform: scale(.5);
+                            }
+                        }
+                    }
+                    .price{
+                        font-weight: 300;
+                        height: .28rem;
+                        span{
+                            color: red;
+                            font-size: .15rem;
+                            &.pri{
+                                font-size: .2rem;
+                            }
+                        }
+                        label{
+                            font-size: .1rem;
+                            transform: scale(0.7);
+                            padding: 0 .05rem;
+                            display: inline-block;
+                            border:1px solid red;
+                            border-radius: .05rem;
+                            color: red;
+                        }
+                    }
+                    .pre-price{
+                        color: #afafaf;
+                        font-size: .1rem;
+                        font-weight: 300;
+                        .s{
+                            text-decoration: line-through;
+                        }
+                    }
+                    .three{
+                        @include flexbox();
+                        @include justify-content(space-between);
+                        @include align-items();
+                        color: #afafaf;
+                        font-size: .1rem;
+                    }
+                }
+                ul{
+                    li{
+                        border-bottom: 1px solid #f3f2f2;
+                        a{
+                            height: .3rem;
+                            background: #fbfbfb;
+                            color: #adacac;
+                            min-height: 0;
+                            .mint-cell-wrapper{
+                                padding: 0 0.07rem;
+                                .mint-cell-text{
+                                    font-size: .1rem;
+                                    transform: scale(0.9);
+                                    display: inline-block;
+                                    height: .3rem;
+                                    line-height: .3rem;
+                                    padding-right: .1rem;
+                                }
+                            }
+                            
+                        }
+                        
+                    }
+                }
+                ul.canshu{
+                    margin-top: .1rem;
+                    a{
+                        height: 0.4rem;
+                        color: #666;
+                        background: #fff;
+                        .mint-cell-wrapper{
+                            .mint-cell-text{
+                                font-size: .13rem;
+                                line-height: .4rem;
+                            }
+                        }
+                        
+                    }
+                }
+
+            }
         }
     }
+    
+    footer{
+        height: .44rem;
+        background: #fff;
+        ul{
+            @include border(1px 0 0 0);
+            @include flexbox();
+            @include align-items();
+            height: 100%;
+            li{
+                @include flex();
+                @include flexbox();
+                
+                @include flex-direction(column);
+                @include justify-content();
+                @include align-items();
+                color: #8e8e8e;
+                i{
+                    font-weight: 100;
+                    font-size: 0.18rem;
+                    height: .21rem;
+                }
+                b{
+                font-weight: 300;
+                font-size: 0.1rem;
+                transform: scale(.7)
+                }
+                &.active b,&.active i{
+                    color: #f02a41;
+                }
+                &:nth-child(4) {
+                    @include flex(2);
+                    height: 100%;
+                    color: #fff;
+                    font-size: .1rem;
+                    background: #f7cc11;
+                }
+                &:nth-child(5) {
+                    @include flex(2);
+                    height: 100%;
+                    color: #fff;
+                    font-size: .1rem;
+                    background: #ff6600;
+                }
+            }
+        }
+    }
+    .mint-popup.mint-popup-bottom{
+        min-height: 4.5rem;
+        background: #fcfcfc;
+        width: 100%;
+        .btn{
+            width: 100%;
+            height: .40rem;
+            background: rgba(252, 81, 13, 0.918);
+            color: #fff;
+            line-height: .4rem;
+            text-align: center;
+        }
+        .jifen{
+            width: 100%;
+            min-height: 4.5rem;
+            @include flexbox();
+            @include flex-direction(column);
+            @include justify-content(space-between);
+            ul{
+                width: 100%;
+                padding: .1rem;
+                height: 100%;
+                overflow-y: scroll;
+                li{
+                    font-size: .12rem;
+                    border-bottom: 1px solid #f3f2f2;
+                    padding: .1rem 0;
+                    color: #adacac;
+                }
+            }
+        }
+        .baozhang{
+            width: 100%;
+            min-height: 4.5rem;
+            @include flexbox();
+            @include flex-direction(column);
+            @include justify-content(space-between);
+            p{
+                padding: .1rem;
+                text-align: center;
+                color: #666;
+            }
+            ul{
+                width: 100%;
+                padding: .1rem;
+                height: 100%;
+                overflow-y: scroll;
+                li{
+                    @include flexbox();
+                    font-size: .12rem;
+                    padding: .1rem 0;
+                    color: #adacac;
+                    span{
+                        display: inline-block;
+                        width: .28rem;
+                        height: .28rem;
+                        border: 1px solid red;
+                        color: red;
+                        text-align: center;
+                        font-size: .16rem;
+                        transform: scale(0.5);
+                        border-radius: 100%;
+                    }
+                }
+            }
+        }
+        .content{
+            width: 100%;
+            min-height: 4.5rem;
+            @include flexbox();
+            @include flex-direction(column);
+            @include justify-content(space-between);
+            .select{
+                padding: .1rem;
+                width: 100%;
+                overflow-y: scroll;
+                .seled{
+                    width: 100%;
+                    height: 1rem;
+                    @include flexbox();
+                    img{
+                        width: 1rem;
+                        height: 1rem;
+                    }
+                    .sel{
+                        @include flexbox();
+                        @include flex-direction(column);
+                        @include justify-content(flex-end);
+                        margin-left: .1rem;
+                        font-size: .12rem;
+                        .red{
+                            color: red;
+                        }
+                    }
+                }
+            }
+        }
+        .button{
+            height: .4rem;
+            width: 100%;
+            @include flexbox();
+            line-height: .4rem;
+            text-align: center;
+            color: #fff;
+            .btn1{
+                height: 100%;
+                @include flex(0.5);
+                background: #f7cc11;
+            }
+            .btn2{
+                height: 100%;
+                @include flex(0.5);
+                background: hsl(24, 98%, 54%)
+            }
+        }
+        
+    }
+    
 }

@@ -1,5 +1,5 @@
 @import "./yo/usage/core/reset";
-
+@import './yo/lib/component/carousel.scss';
 @import '../styles/modules/commen.scss';
 @import '../styles/modules/index.scss';
 
@@ -11,3 +11,4 @@
 @import './modules/component/products-list.scss';
 @import './modules/component/carousel.scss';
 @import './modules/component/product-detail.scss';
+
