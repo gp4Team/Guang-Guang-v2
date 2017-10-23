@@ -1,0 +1,13 @@
+@import "./yo/usage/core/reset";
+
+@import '../styles/modules/commen.scss';
+@import '../styles/modules/index.scss';
+
+@import './modules/component/top.scss';
+@import './modules/component/foot.scss';
+
+@import './modules/main/main.scss';
+@import './modules/component/main-classify.scss';
+@import './modules/component/products-list.scss';
+@import './modules/component/carousel.scss';
+@import './modules/component/product-detail.scss';
