@@ -90,7 +90,6 @@ import Carousel from '../component/carousel.vue'
 import ProductsList from '../component/products-list.vue'
 import MainClassify from '../component/main-classify.vue'
 import Vue from 'vue'
-import axios from 'axios'
 export default {
     data() {
         return {
@@ -104,13 +103,21 @@ export default {
         ProductsList: ProductsList,
     },
     mounted() {
-        axios.get('/vip/list.php')
-        .then((res)=>{
-            console.log(res)
-            const data = res.data.list
-            this.goodsList = data
+        // axios.get('/vip/list.php')
+        // .then((res)=>{
+        //     // console.log(res)
+        //     const data = res.data.list
+        //     this.goodsList = data
+        //     this.isShowloading = false
+        // })
+        this.$jsonp('http://datainfo.duapp.com/shopdata/getGoods.php').then( data => {
+            const list = data
+            this.goodsList = list
             this.isShowloading = false
         })
+    },
+    methods: {
+        
     }
 }
 </script>

@@ -45,6 +45,13 @@ module.exports = {
         pathRewrite: {
           '^/vip': ''
         }
+      },
+      '/mainclass': {
+        target: 'http://localhost:7000/',
+        changeOrigin: true,
+        pathRewrite: {
+          '^/mainclass': ''
+        }
       }
     },
     // CSS Sourcemaps off by default because relative paths are "buggy"
