@@ -1,123 +1,123 @@
 {
     "list" : [
         {
-            "titleUrl" : "../../assets/images/classify/t1.png",
+            "titleUrl" : "/static/images/classify/t1.png",
             "bgimg" : [
-                "../../assets/images/classify/m1.jpeg",
-                "../../assets/images/classify/m1.jpeg",
-                "../../assets/images/classify/m1.jpeg",
-                "../../assets/images/classify/m1.jpeg"
+                "/static/images/m1.jpeg",
+                "/static/images/classify/m1.jpeg",
+                "/static/images/classify/m1.jpeg",
+                "/static/images/classify/m1.jpeg"
             ],
             "smallimg" : [
-                "../../assets/images/classify/s1.jpeg",
-                "../../assets/images/classify/s1.jpeg",
-                "../../assets/images/classify/s1.jpeg",
-                "../../assets/images/classify/s1.jpeg"
+                "/static/images/classify/s1.jpeg",
+                "/static/images/classify/s1.jpeg",
+                "/static/images/classify/s1.jpeg",
+                "/static/images/classify/s1.jpeg"
             ],
-            "backimg" : "../../assets/images/classify/bg1.jpg",
-            "longimg" : "../../assets/images/classify/lo1.jpg"
+            "backimg" : "/static/images/classify/bg1.jpg",
+            "longimg" : "/static/images/classify/lo1.jpg"
         },
         {
-            "titleUrl" : "../../assets/images/classify/t2.png",
+            "titleUrl" : "/static/images/classify/t2.png",
             "bgimg" : [
-                "../../assets/images/classify/m1.jpeg",
-                "../../assets/images/classify/m1.jpeg",
-                "../../assets/images/classify/m1.jpeg",
-                "../../assets/images/classify/m1.jpeg"
+                "/static/images/classify/m1.jpeg",
+                "/static/images/classify/m1.jpeg",
+                "/static/images/classify/m1.jpeg",
+                "/static/images/classify/m1.jpeg"
             ],
             "smallimg" : [
-                "../../assets/images/classify/s1.jpeg",
-                "../../assets/images/classify/s1.jpeg",
-                "../../assets/images/classify/s1.jpeg",
-                "../../assets/images/classify/s1.jpeg"
+                "/static/images/classify/s1.jpeg",
+                "/static/images/classify/s1.jpeg",
+                "/static/images/classify/s1.jpeg",
+                "/static/images/classify/s1.jpeg"
             ],
-            "backimg" : "../../assets/images/classify/bg2.jpg",
-            "longimg" : "../../assets/images/classify/lo2.jpeg"
+            "backimg" : "/static/images/classify/bg2.jpg",
+            "longimg" : "/static/images/classify/lo2.jpeg"
         },
         {
-            "titleUrl" : "../../assets/images/classify/t3.png",
+            "titleUrl" : "/static/images/classify/t3.png",
             "bgimg" : [
-                "../../assets/images/classify/m1.jpeg",
-                "../../assets/images/classify/m1.jpeg",
-                "../../assets/images/classify/m1.jpeg",
-                "../../assets/images/classify/m1.jpeg"
+                "/static/images/classify/m1.jpeg",
+                "/static/images/classify/m1.jpeg",
+                "/static/images/classify/m1.jpeg",
+                "/static/images/classify/m1.jpeg"
             ],
             "smallimg" : [
-                "../../assets/images/classify/s1.jpeg",
-                "../../assets/images/classify/s1.jpeg",
-                "../../assets/images/classify/s1.jpeg",
-                "../../assets/images/classify/s1.jpeg"
+                "/static/images/classify/s1.jpeg",
+                "/static/images/classify/s1.jpeg",
+                "/static/images/classify/s1.jpeg",
+                "/static/images/classify/s1.jpeg"
             ],
-            "backimg" : "../../assets/images/classify/bg3.jpg",
-            "longimg" : "../../assets/images/classify/lo3.jpeg"
+            "backimg" : "/static/images/classify/bg3.jpg",
+            "longimg" : "/static/images/classify/lo3.jpeg"
         },
         {
-            "titleUrl" : "../../assets/images/classify/t4.png",
+            "titleUrl" : "/static/images/classify/t4.png",
             "bgimg" : [
-                "../../assets/images/classify/m1.jpeg",
-                "../../assets/images/classify/m1.jpeg",
-                "../../assets/images/classify/m1.jpeg",
-                "../../assets/images/classify/m1.jpeg"
+                "/static/images/classify/m1.jpeg",
+                "/static/images/classify/m1.jpeg",
+                "/static/images/classify/m1.jpeg",
+                "/static/images/classify/m1.jpeg"
             ],
             "smallimg" : [
-                "../../assets/images/classify/s1.jpeg",
-                "../../assets/images/classify/s1.jpeg",
-                "../../assets/images/classify/s1.jpeg",
-                "../../assets/images/classify/s1.jpeg"
+                "/static/images/classify/s1.jpeg",
+                "/static/images/classify/s1.jpeg",
+                "/static/images/classify/s1.jpeg",
+                "/static/images/classify/s1.jpeg"
             ],
-            "backimg" : "../../assets/images/classify/bg4.jpg",
-            "longimg" : "../../assets/images/classify/lo4.jpeg"
+            "backimg" : "/static/images/classify/bg4.jpg",
+            "longimg" : "/static/images/classify/lo4.jpeg"
         },
         {
-            "titleUrl" : "../../assets/images/classify/t5.png",
+            "titleUrl" : "/static/images/classify/t5.png",
             "bgimg" : [
-                "../../assets/images/classify/m1.jpeg",
-                "../../assets/images/classify/m1.jpeg",
-                "../../assets/images/classify/m1.jpeg",
-                "../../assets/images/classify/m1.jpeg"
+                "/static/images/classify/m1.jpeg",
+                "/static/images/classify/m1.jpeg",
+                "/static/images/classify/m1.jpeg",
+                "/static/images/classify/m1.jpeg"
             ],
             "smallimg" : [
-                "../../assets/images/classify/s1.jpeg",
-                "../../assets/images/classify/s1.jpeg",
-                "../../assets/images/classify/s1.jpeg",
-                "../../assets/images/classify/s1.jpeg"
+                "/static/images/classify/s1.jpeg",
+                "/static/images/classify/s1.jpeg",
+                "/static/images/classify/s1.jpeg",
+                "/static/images/classify/s1.jpeg"
             ],
-            "backimg" : "../../assets/images/classify/bg5.jpg",
-            "longimg" : "../../assets/images/classify/lo5.jpeg"
+            "backimg" : "/static/images/classify/bg5.jpg",
+            "longimg" : "/static/images/classify/lo5.jpeg"
         },
         {
-            "titleUrl" : "../../assets/images/classify/t6.png",
+            "titleUrl" : "/static/images/classify/t6.png",
             "bgimg" : [
-                "../../assets/images/classify/m1.jpeg",
-                "../../assets/images/classify/m1.jpeg",
-                "../../assets/images/classify/m1.jpeg",
-                "../../assets/images/classify/m1.jpeg"
+                "/static/images/classify/m1.jpeg",
+                "/static/images/classify/m1.jpeg",
+                "/static/images/classify/m1.jpeg",
+                "/static/images/classify/m1.jpeg"
             ],
             "smallimg" : [
-                "../../assets/images/classify/s1.jpeg",
-                "../../assets/images/classify/s1.jpeg",
-                "../../assets/images/classify/s1.jpeg",
-                "../../assets/images/classify/s1.jpeg"
+                "/static/images/classify/s1.jpeg",
+                "/static/images/classify/s1.jpeg",
+                "/static/images/classify/s1.jpeg",
+                "/static/images/classify/s1.jpeg"
             ],
-            "backimg" : "../../assets/images/classify/bg6.jpg",
-            "longimg" : "../../assets/images/classify/lo6.jpeg"
+            "backimg" : "/static/images/classify/bg6.jpg",
+            "longimg" : "/static/images/classify/lo6.jpeg"
         },
         {
-            "titleUrl" : "../../assets/images/classify/t7png",
+            "titleUrl" : "/static/images/classify/t7png",
             "bgimg" : [
-                "../../assets/images/classify/m1.jpeg",
-                "../../assets/images/classify/m1.jpeg",
-                "../../assets/images/classify/m1.jpeg",
-                "../../assets/images/classify/m1.jpeg"
+                "/static/images/classify/m1.jpeg",
+                "/static/images/classify/m1.jpeg",
+                "/static/images/classify/m1.jpeg",
+                "/static/images/classify/m1.jpeg"
             ],
             "smallimg" : [
-                "../../assets/images/classify/s1.jpeg",
-                "../../assets/images/classify/s1.jpeg",
-                "../../assets/images/classify/s1.jpeg",
-                "../../assets/images/classify/s1.jpeg"
+                "/static/images/classify/s1.jpeg",
+                "/static/images/classify/s1.jpeg",
+                "/static/images/classify/s1.jpeg",
+                "/static/images/classify/s1.jpeg"
             ],
-            "backimg" : "../../assets/images/classify/bg7.jpg",
-            "longimg" : "../../assets/images/classify/lo7.jpeg"
+            "backimg" : "/static/images/classify/bg7.jpg",
+            "longimg" : "/static/images/classify/lo7.jpeg"
         }
     ]
 }

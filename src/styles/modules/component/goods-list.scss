@@ -1,0 +1,60 @@
+@font-face {
+    font-family: 'yofont';
+    src: url('../assets/images/iconfont/iconfont3.woff') format('woff'), url('../assets/images/iconfont/iconfont3.ttf') format('truetype')
+  }
+//   @import '/assets/images/iconfont/iconfont3.css';
+.goodslist{
+    height: 100%;
+    @include flexbox();
+    @include flex-direction(column);
+    background: $base-color;
+    .goods{
+        @include flex();
+        width: 100%;
+        overflow-y: scroll;
+    }
+    .top{
+        .mint-header{
+            background-color: #ffffff;
+            .mint-header-button{
+                @include flex();
+                button{
+                    color: #888;
+                    span{
+                        display: inline-block;
+                        height: 100%;
+                        line-height: .4rem;
+                        width: .16rem;
+                    }
+                }
+            }
+            input{
+                width: 65%;
+                height: .26rem;
+                border: 1px solid #f6f6f6;
+                border-radius: 3px;
+                padding: 0.05rem;
+                font-size: 0.12rem;
+                position: relative;
+                color: #666;
+            }
+            i{
+                position: absolute;
+                z-index: 1;
+                right: 5%;
+                color: #b1b1b1;
+            }
+        }
+        .sortmenu{
+            height: .18rem;
+            ul{
+                height: 100%;
+                color: #666;
+                font-size: .13rem;
+                @include flexbox();
+                @include justify-content(space-around);
+            }
+        }
+    }
+    
+}

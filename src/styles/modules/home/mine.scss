@@ -1,0 +1,157 @@
+
+.m-index{
+    section{
+        @include flexbox(); 
+        .m-mine{
+            @include flexbox();
+            @include flex-direction(column); 
+            background: #f0f0f0;  
+            width: 100%;
+            height: 100%;
+
+            .mine-top{
+                width: 100%;
+                height: 1.48rem;
+                background:url(../assets/images/home/mineBg.jpg) no-repeat;
+                .head{
+                    @include flexbox();
+                    @include flex-direction(); 
+                    height: 1.08rem;
+                    width: 100%;
+                    padding: 0 .08rem;
+                    span{
+                        width: .2rem;
+                        height: 100%;
+                        @include flexbox();
+                        &:first-child i{
+                            width: 100%;
+                            height: .2rem;
+                            margin-top:.16rem ;
+                            font-size: 24px;
+                            color:#fff;                     
+                        }
+                        &:last-child i{
+                            width: 100%;
+                            height: .2rem;
+                            margin-top:.52rem ; 
+                            font-size: 16px;
+                            color:#fff;                  
+                        }
+              
+                    }
+                    .my-image{
+                        @include flex();
+                        @include flexbox();
+                        @include flex-direction(column); 
+                        @include align-items();
+                        @include justify-content(flex-end)
+                        height: 100%;
+                        .head-portrait{
+                            width: .53rem;
+                            height: .53rem;
+                            border-radius: 50%;
+                            background: red;
+                            img{
+                                width: 100%;
+                                height: 100%;
+                            }
+                        }
+                        .my-name{
+                            color: #fff;
+                            font-size: 10px;
+                            padding-top: .1rem;
+                        }
+                    }
+                }
+            }
+            .my-menu{
+                @include flexbox();
+                @include flex-direction(column); 
+                background: #fff;
+                width: 100%;
+                height: .92rem;
+                margin-bottom:.08rem ;
+                .order{
+                    @include flexbox();
+                    @include flex-direction(); 
+                    height: .35rem;
+                    width: 100%;
+                    padding: 0.08rem;
+                    border-bottom: 1px solid  rgb(215, 215, 215);
+                    a{
+                        
+                        color:#010101;
+                        font-size: 10px;
+                        width: 50%;
+                        height: 100%;
+                        &:last-child{
+                          text-align: right;
+                          i{
+                              font-size: 16px;
+                          }
+                        }
+                    }
+                }
+                .menu-list{
+                    @include flexbox();
+                    @include flex-direction(); 
+                    height: .38rem;
+                    width: 100%;
+                    padding: .08rem 0;
+                    li{
+                        width: 20%;
+                        height:100%;
+                        @include flexbox();
+                        @include flex-direction(column); 
+                        @include align-items();
+                        i{
+                            font-size: 20px;
+                        }
+                        span{
+                            font-size: 10px;
+                        }
+                    }
+                }
+            }
+            .more{
+                background: #fff;
+                width: 100%;
+                height: 1.35rem;
+                @include flexbox();
+                @include flex-direction(column); 
+                p{
+                    height: .38rem;
+                    padding: 0 .08rem;
+                    line-height: .38rem;
+                    font-size: 10px;
+                    border-bottom:1px solid rgb(215, 215, 215) ;
+                }
+                .more-list{
+                    @include flexbox();
+                    border-bottom:1px solid rgb(215, 215, 215) ;
+                    @include flex-direction();
+                    width: 100%;
+                    li{
+                        @include flexbox();
+                        @include flex-direction(column); 
+                        @include align-items(center);
+                        @include justify-content(center)
+                        height: .96rem;
+                        width: 25%;
+                        border-right:1px solid rgb(215, 215, 215) ;
+                        &:last-child{
+                            border-right:none;
+                        }
+                        i{
+                            font-size: 20px;
+                            color:orangered;
+                        }
+                        span{
+                            font-size: 10px;
+                        }
+                    }
+                }
+            }
+        }
+    } 
+}

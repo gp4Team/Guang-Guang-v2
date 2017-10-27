@@ -40,7 +40,6 @@ export default {
         .then((res)=>{
             const datalist = res.data.list;
             this.classList = datalist
-            console.log(this.classList)
             for(let i in this.classList){
                 this.list = this.classList[i].bgimg
             }

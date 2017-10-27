@@ -3,6 +3,7 @@
     src: url('../assets/images/iconfont/iconfont2.woff') format('woff'), url('../assets/images/iconfont/iconfont2.ttf') format('truetype')
   }
 .detail{
+    
     width: 100%;
     height: 100%;
     @include flexbox();
@@ -16,32 +17,16 @@
             .gooddetail{
                 height: 3.2rem;
                 width: 100%;
-                background: #f0f;
+                background: #fff;
                 position: relative;
                 .mint-header{
-                    position: absolute;
-                    z-index: 2;
-                    overflow: hidden;
-                    width: 100%;
                     background-color: transparent;
-                    height: .44rem;
-                    .mint-header-button{
-                        flex:.5;
-                        button{
-                            width: .24rem;
-                            height: .24rem;
-                            background: rgba(0,0,0,.3);
-                            border-radius: 100%;
-                        }
-                    }
-                    .mintui{
-                        color: #fff;
-                    }
                 }
                 .mint-swipe-item{
                     width: 100%;
                     img{
                         width: 100%;
+                        height: 3.2rem;
                     }
                     
                 }
@@ -72,6 +57,7 @@
                             @include flex(.9);
                         }
                         .share{
+                            margin-top: .08rem;
                             @include flexbox();
                             @include flex-direction(column);
                             @include align-items();
@@ -124,7 +110,7 @@
                 }
                 ul{
                     li{
-                        border-bottom: 1px solid #f3f2f2;
+                        border-bottom: 1px solid #eeeeee;
                         a{
                             height: .3rem;
                             background: #fbfbfb;
@@ -152,7 +138,9 @@
                         height: 0.4rem;
                         color: #666;
                         background: #fff;
+                        border-bottom: 1px solid #eeeeee;
                         .mint-cell-wrapper{
+                            background-image: none;
                             .mint-cell-text{
                                 font-size: .13rem;
                                 line-height: .4rem;
@@ -161,7 +149,103 @@
                         
                     }
                 }
-
+                .comment{
+                    width: 100%;
+                    height: 1.8rem;
+                    background: #fff;
+                    padding: .07rem;
+                    p{
+                        font-size: .12rem;
+                        color: #8e8e8e;
+                    }
+                    ul{
+                        margin: .1rem .07rem;
+                        color: #8e8e8e;
+                        font-size: .12rem;
+                        li{
+                            height: 100%;
+                            width: 100%;
+                            border-bottom: none;
+                            .user{
+                                @include flexbox();
+                                @include align-items();
+                                font-size: .1rem;
+                                img{
+                                    width: .3rem;
+                                    height: .3rem;
+                                    border-radius: 50%;
+                                    margin-right: .1rem;
+                                }
+                            }
+                            .content{
+                                padding-top: .05rem;
+                                color: #666;
+                            }
+                        }
+                    }
+                    .more{
+                        padding-top: .1rem;
+                        text-align: center;
+                        span{
+                            font-size: .15rem;
+                            transform: scale(0.7);
+                            display: inline-block;
+                            width: 1.3rem;
+                            height: .3rem;
+                            border: 1px solid #e4393c;
+                            border-radius: .13rem;
+                            line-height: .3rem;
+                            text-align: center;
+                            color: #e4393c;
+                        }
+                    }
+                }
+                .detailInfo{
+                    width: 100%;
+                    img{
+                        width: 100%;
+                    }
+                }
+                .fenge{
+                    color: #8e8e8e;
+                    font-size: .15rem;
+                    height: .3rem;
+                    transform: scale(0.7);
+                    font-weight: 300;
+                    @include flexbox();
+                    @include justify-content();
+                    @include align-items();
+                    b{
+                        
+                        width: 1.4rem;
+                        height: 1px;
+                        background: #8c8c8c;
+                        transform: scale(0.5);
+                    }
+                    span{
+                        // width: .6rem;
+                    }
+                }
+            }
+            .mint-header{
+                position: absolute;
+                z-index: 2;
+                overflow: hidden;
+                width: 100%;
+                background-color: rgba(255, 0, 200, 0.82);
+                height: .44rem;
+                .mint-header-button{
+                    flex:.5;
+                    button{
+                        width: .24rem;
+                        height: .24rem;
+                        background: rgba(0,0,0,.3);
+                        border-radius: 100%;
+                    }
+                }
+                .mintui{
+                    color: #fff;
+                }
             }
         }
     }
@@ -237,7 +321,7 @@
                 overflow-y: scroll;
                 li{
                     font-size: .12rem;
-                    border-bottom: 1px solid #f3f2f2;
+                    // border-bottom: 1px solid #f3f2f2;
                     padding: .1rem 0;
                     color: #adacac;
                 }
@@ -307,6 +391,70 @@
                         }
                     }
                 }
+                ul.class{
+                    padding-top: .1rem;
+                    font-size: .12rem;
+                    li{
+                        line-height: .3rem;
+                        .mint-badge.is-size-small{
+                            height: .24rem;
+                            line-height: .24rem;
+                            padding: 0 .1rem;
+                            border-radius: .1rem;
+                        }
+                        &.size{
+                            span{
+                                height: .3rem;
+                                line-height: .3rem;
+                                padding: .02rem .15rem;
+                                border-radius: .1rem;
+                                background: #f3f2f2;
+                                color: #8c8c8c;
+                                margin-right: .1rem;
+                                &.active{
+                                    background: red;
+                                    color: #fff;
+                                }
+                            }
+                        }
+                        &.addc{
+                            padding-top: .1rem;
+                            @include flexbox();
+                            @include justify-content(space-between);
+                            .cal{
+                                width: .8rem;
+                                height: .24rem;
+                                line-height: .24rem;
+                                text-align: center;
+                                input,span,span{
+                                    display: inline-block;
+                                    width: .24rem;
+                                    height: .24rem;
+                                    background:#f3f0f0;
+                                    outline: none;
+                                    border: none;
+                                    text-align: center;
+                                }  
+                                input{
+                                    font-weight: 500;
+                                    color: #666;
+                                } 
+                                span{
+                                    color: #adacac;
+                                    font-weight: 500;
+                                    // font-size: .13rem;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        .can{
+            padding: .1rem .15rem;
+            p{
+                font-size: .11rem;
+                color: #8c8c8c;
             }
         }
         .button{

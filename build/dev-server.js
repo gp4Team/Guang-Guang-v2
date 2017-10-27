@@ -67,7 +67,7 @@ const staticPath = path.posix.join(config.dev.assetsPublicPath, config.dev.asset
 app.use(staticPath, express.static('./static'))
 
 const uri = 'http://localhost:' + port
-
+// const uri = 'http://10.9.164.7:' + port
 var _resolve
 var _reject
 var readyPromise = new Promise((resolve, reject) => {
@@ -87,6 +87,7 @@ devMiddleware.waitUntilValid(() => {
     }
     process.env.PORT = port
     var uri = 'http://localhost:' + port
+    // var uri = 'http://10.9.164.7:' + port
     console.log('> Listening at ' + uri + '\n')
     // when env is testing, don't need open it
     if (autoOpenBrowser && process.env.NODE_ENV !== 'testing') {

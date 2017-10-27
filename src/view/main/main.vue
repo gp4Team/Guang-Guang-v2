@@ -80,7 +80,10 @@
                 </div>
             </div>
             <main-classify></main-classify>
-            <products-list :list = 'goodsList'></products-list>
+            <div class="products">
+                <p>艺术品专卖</p>
+                <products-list :sort-type = '0'></products-list>
+            </div>
         </div>
     </div>
     
@@ -90,10 +93,11 @@ import Carousel from '../component/carousel.vue'
 import ProductsList from '../component/products-list.vue'
 import MainClassify from '../component/main-classify.vue'
 import Vue from 'vue'
+
 export default {
     data() {
         return {
-            hasLoading:false,
+            hasLoading:true,
             goodsList:[]
         }
     },
@@ -103,17 +107,19 @@ export default {
         ProductsList: ProductsList,
     },
     mounted() {
-        // axios.get('/vip/list.php')
-        // .then((res)=>{
-        //     // console.log(res)
-        //     const data = res.data.list
-        //     this.goodsList = data
-        //     this.isShowloading = false
-        // })
         this.$jsonp('http://datainfo.duapp.com/shopdata/getGoods.php').then( data => {
             const list = data
             this.goodsList = list
-            this.isShowloading = false
+            this.hasLoading = false
+            // 将数据存到仓库
+            // this.$store.commit('getGoodsList',this.goodsList)
+            //actions
+            this.$store.dispatch({
+                type: 'getProlist',
+                productslist: this.goodsList
+            })
+            this.$store.commit('setPageName','/main')
+            //
         })
     },
     methods: {

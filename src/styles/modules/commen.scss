@@ -3,13 +3,21 @@
     height: 100%;
 }
   $base-color: #fff;
+  
+
+  //home 引入字体图标
+  @font-face {
+    font-family: 'yofont';
+    src: url('../assets/images/home/iconfont.woff') format('woff'), url('../assets/images/home/iconfont.ttf') format('truetype')
+  }
   @font-face {
     font-family: 'yofont';
     src: url('../assets/images/iconfont/iconfont.woff') format('woff'), url('../assets/images/iconfont/iconfont.ttf') format('truetype')
   }
-
-  // @font-face {
-  //   font-family: 'yofont';
-  //   src: url('http://localhost:7000/media/iconfont/iconfont2.woff') format('woff'), url('http://localhost:7000/media/iconfont/iconfont2.ttf') format('truetype')
-  // }
+  .fade-enter-active, .fade-leave-active {
+    transition: opacity .5s;
+  }
+  .fade-enter, .fade-leave-to{
+    opacity: 0;
+  }
   
