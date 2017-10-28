@@ -252,12 +252,12 @@
     
     footer{
         height: .44rem;
-        background: #fff;
         ul{
             @include border(1px 0 0 0);
             @include flexbox();
             @include align-items();
             height: 100%;
+            background: #fff;
             li{
                 @include flex();
                 @include flexbox();

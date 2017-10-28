@@ -33,7 +33,7 @@ module.exports = {
     assetsPublicPath: '/',
     proxyTable: {
       '/api': {
-        target: 'http://m.womai.com/',
+        target: 'http://m.86gg.cn/',
         changeOrigin: true,
         pathRewrite: {
           '^/api': ''
@@ -41,6 +41,7 @@ module.exports = {
       },
       '/vip': {
         target: 'http://localhost:6000/',
+        // target: 'http://10.9.164.7:6000/',
         changeOrigin: true,
         pathRewrite: {
           '^/vip': ''
@@ -48,6 +49,7 @@ module.exports = {
       },
       '/mainclass': {
         target: 'http://localhost:7000/',
+        // target: 'http://10.9.164.7:7000/',
         changeOrigin: true,
         pathRewrite: {
           '^/mainclass': ''

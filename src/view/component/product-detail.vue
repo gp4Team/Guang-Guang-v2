@@ -16,7 +16,7 @@
                             </a>
                         </div> 
                         <div class="mint-header-button is-right">
-                            <a>
+                            <a @click="go_cart">
                                 <button class="mint-button mint-button--default mint-button--normal">
                                     <span class="mint-button-icon">
                                         <i class="mintui yo-ico">&#xe60c;</i>
@@ -33,6 +33,28 @@
                         </div> 
                     </header>
                 </transition>
+                <header v-if="hasCommentHead" class="mint-header header-nav">
+                        <div class="mint-header-button is-left">
+                            <a @click.prevent="closeComment" class="active">
+                                <button class="mint-button mint-button--default mint-button--normal">
+                                    <span class="mint-button-icon">
+                                        <i class="mintui mintui-back"></i>
+                                    </span> 
+                                </button>
+                            </a>
+                            
+                        </div> 
+                        <h1>评价详情</h1> 
+                        <div class="mint-header-button is-right">
+                            <a @click="goComment">
+                                <button class="mint-button mint-button--default mint-button--normal">
+                                    <span class="mint-button-icon">
+                                        <i class="mintui yo-ico">&#xe66d;</i>
+                                    </span> 
+                                </button>
+                            </a>
+                        </div> 
+                    </header>
                 <div class="gooddetail">
                     <header v-if="!isHeaderShow" class="mint-header">
                         <div class="mint-header-button is-left">
@@ -45,7 +67,7 @@
                             </a>
                         </div> 
                         <div class="mint-header-button is-right">
-                            <a>
+                            <a  @click="go_cart">
                                 <button class="mint-button mint-button--default mint-button--normal">
                                     <span class="mint-button-icon">
                                         <i class="mintui yo-ico">&#xe60c;</i>
@@ -164,13 +186,16 @@
                                 <div class="type">颜色分类：一长一短耳夹</div>
                             </li>
                         </ul>
-                        <div class="more"><span>查看全部评价</span></div>
+                        <div class="more" @click="getComments"><span>查看全部评价</span></div>
                     </div>
                     <div class="fenge"><b></b><span>详情</span><b></b></div>
                     <div class="detailInfo">
                         <img v-for="(item,i) in imgsUrl" v-bind:key="i" :src="item" alt="">
                     </div>
                 </div>
+                <mt-popup class="commentPop" v-model="commentPopup" :modal=false position="right">
+                    <comments :go-comment-type ="go_comment"></comments>
+                </mt-popup> 
             </section>
         </div>
         <footer>
@@ -331,6 +356,7 @@
                 </div>
             </template>
         </mt-popup>
+        
     </div>    
 </template>
 <script>
@@ -349,10 +375,12 @@ Vue.component(SwipeItem.name, SwipeItem);
 Vue.component(Cell.name, Cell);
 Vue.component(Popup.name, Popup);
 Vue.component(Toast.name, Toast);
+import Comments from '../component/comments.vue'
 export default {
     data() {
         return{
             isHeaderShow:false,
+            hasCommentHead:false,
             index:1,
             popupVisible:false,
             coverType: 0,
@@ -363,8 +391,14 @@ export default {
             isActive:'s',
             size: 's',
             count: '1',
-            scroll: ''
+            scroll: '',
+            commentPopup:false,
+            ismodal:false,
+            go_comment: 1
         }
+    },
+    components: {
+        Comments : Comments
     },
     computed: {
         imgsUrl() {
@@ -385,8 +419,18 @@ export default {
             this.popupVisible = true;
             this.coverType = type;
         },
+        getComments() {
+            this.commentPopup = true;
+            this.hasCommentHead = true;
+            this.isHeaderShow = false;
+        },
         closeCover() {
             this.popupVisible = !this.popupVisible;
+        },
+        closeComment(){
+            this.hasCommentHead = false;
+            this.commentPopup = false;
+            this.isHeaderShow = true;
         },
         selectSize(size){
             this.isActive = size;
@@ -416,7 +460,15 @@ export default {
             if(curp == '/goods-list') {
                  this.$router.push({name: 'goodslist',query:{"list":this.goodsList}})
             }
+        },
+        goComment() {
+            ++this.go_comment
+        },
+        go_cart () {
+            this.$router.push({name: 'cart'})
+            this.$store.commit('setPageName','/product-detail')
         }
+
     }
 }
 </script>
@@ -432,7 +484,14 @@ export default {
         position: absolute;
         top: 0;
         left: 0;
-        background: rgba(245, 86, 198, 0.93);
+        background: rgba(245, 86, 198,1);
+    }
+    .mint-popup.mint-popup-right{
+        width: 100%;
+        height: 100%;
+        z-index: 0!important;
+        padding: .4rem 0;
+        overflow-y: scroll;
     }
 </style>
 

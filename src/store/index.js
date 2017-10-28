@@ -4,6 +4,7 @@ import Vuex from 'vuex'
 //模块
 import productsList from './modules/products-list'
 import productDetail from './modules/product-detail'
+import commentsList from './modules/comments-list'
 
 import * as actions from './actions'
 import * as getters from './getters'
@@ -19,7 +20,8 @@ const store = new Vuex.Store({
     //模板
     modules: {
         productsList,
-        productDetail
+        productDetail,
+        commentsList
     },
     mutations: {
         setPageName(state,payload) {

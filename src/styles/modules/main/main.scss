@@ -48,6 +48,7 @@
         .ad{
             padding: .05rem 0.2rem;
             @include flexbox();
+            background: #fff;
             span{
                 display: inline-block;
                 width: 0.6rem;
