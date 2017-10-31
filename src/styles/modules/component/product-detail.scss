@@ -14,6 +14,22 @@
         overflow-y: scroll;
         section{
             height: 100%;
+            span.cartCount{
+                display: inline-block;
+                width: .15rem;
+                height: .15rem;
+                border-radius: 50%;
+                background: red;
+                text-align: center;
+                line-height: .15rem;
+                position: absolute;
+                z-index: 1;
+                right: .35rem;
+                i{
+                    font-size: .12rem;
+                    transform: scale(.6);
+                }
+            }
             .gooddetail{
                 height: 3.2rem;
                 width: 100%;
@@ -252,12 +268,12 @@
     
     footer{
         height: .44rem;
-        background: #fff;
         ul{
             @include border(1px 0 0 0);
             @include flexbox();
             @include align-items();
             height: 100%;
+            background: #fff;
             li{
                 @include flex();
                 @include flexbox();

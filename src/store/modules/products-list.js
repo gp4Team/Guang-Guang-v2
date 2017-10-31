@@ -11,11 +11,11 @@ const getters = {
             const data = state.productsList
             
             switch(type) {
-                case 0:console.log('改了type'+type); return state.defaultlist;break;
-                case 1:console.log('改了type'+type); return data.sort((a,b) => {return a.price - b.price});break;
-                case 2:console.log('改了type'+type); return data.sort((a,b) => {return b.price - a.price});break;
-                case 3:console.log('改了type'+type); return data.sort((a,b) => {return a.discount - b.discount});break;
-                case 4:console.log('改了type'+type); return data.sort((a,b) => {return b.discount - a.discount});break;
+                case 0:  return state.defaultlist;break;
+                case 1:  return data.sort((a,b) => {return a.price - b.price});break;
+                case 2:  return data.sort((a,b) => {return b.price - a.price});break;
+                case 3:  return data.sort((a,b) => {return a.discount - b.discount});break;
+                case 4:  return data.sort((a,b) => {return b.discount - a.discount});break;
             }
         }
     },

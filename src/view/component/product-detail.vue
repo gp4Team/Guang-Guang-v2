@@ -15,11 +15,14 @@
                                 </button>
                             </a>
                         </div> 
+                        
                         <div class="mint-header-button is-right">
-                            <a>
+                            <span class="cartCount" v-if="this.$store.getters.cartCount !== 0"><i>{{this.$store.getters.cartCount}}</i></span>
+                            <a @click="go_cart">
                                 <button class="mint-button mint-button--default mint-button--normal">
                                     <span class="mint-button-icon">
                                         <i class="mintui yo-ico">&#xe60c;</i>
+                                        
                                     </span> 
                                 </button>
                             </a>
@@ -33,6 +36,28 @@
                         </div> 
                     </header>
                 </transition>
+                <header v-if="hasCommentHead" class="mint-header header-nav">
+                        <div class="mint-header-button is-left">
+                            <a @click.prevent="closeComment" class="active">
+                                <button class="mint-button mint-button--default mint-button--normal">
+                                    <span class="mint-button-icon">
+                                        <i class="mintui mintui-back"></i>
+                                    </span> 
+                                </button>
+                            </a>
+                            
+                        </div> 
+                        <h1>评价详情</h1> 
+                        <div class="mint-header-button is-right">
+                            <a @click="goComment">
+                                <button class="mint-button mint-button--default mint-button--normal">
+                                    <span class="mint-button-icon">
+                                        <i class="mintui yo-ico">&#xe66d;</i>
+                                    </span> 
+                                </button>
+                            </a>
+                        </div> 
+                    </header>
                 <div class="gooddetail">
                     <header v-if="!isHeaderShow" class="mint-header">
                         <div class="mint-header-button is-left">
@@ -45,7 +70,8 @@
                             </a>
                         </div> 
                         <div class="mint-header-button is-right">
-                            <a>
+                            <span class="cartCount" v-if="this.$store.getters.cartCount !== 0"><i>{{this.$store.getters.cartCount}}</i></span>
+                            <a  @click="go_cart">
                                 <button class="mint-button mint-button--default mint-button--normal">
                                     <span class="mint-button-icon">
                                         <i class="mintui yo-ico">&#xe60c;</i>
@@ -61,8 +87,6 @@
                             </a>
                         </div> 
                     </header>
-
-                    
                     <mt-swipe :show-indicators="false" @change="handleChange" :auto="3000">
                         <mt-swipe-item v-for="(item,i) in imgsUrl" v-bind:key="i"><img :src="item" alt=""></mt-swipe-item>
                         <span class="pagenation">{{index}}/{{imgsUrl.length}}</span>
@@ -130,7 +154,7 @@
                                 <div class="mint-cell-left"></div>
                                 <div class="mint-cell-wrapper">
                                     <div class="mint-cell-title">
-                                        <span class="mint-cell-text">已选"{{size}}""图片色"</span> 
+                                        <span class="mint-cell-text">已选"{{size}}""{{color}}"</span> 
                                     </div>
                                 </div>
                                 <div class="mint-cell-right"></div> 
@@ -164,13 +188,16 @@
                                 <div class="type">颜色分类：一长一短耳夹</div>
                             </li>
                         </ul>
-                        <div class="more"><span>查看全部评价</span></div>
+                        <div class="more" @click="getComments"><span>查看全部评价</span></div>
                     </div>
                     <div class="fenge"><b></b><span>详情</span><b></b></div>
                     <div class="detailInfo">
                         <img v-for="(item,i) in imgsUrl" v-bind:key="i" :src="item" alt="">
                     </div>
                 </div>
+                <mt-popup class="commentPop" v-model="commentPopup" :modal=false position="right">
+                    <comments :go-comment-type ="go_comment"></comments>
+                </mt-popup> 
             </section>
         </div>
         <footer>
@@ -270,7 +297,7 @@
                             <div class="sel">
                                 <span class="red">&yen;{{goodsInfo.price}}</span>
                                 <span>库存867件</span>
-                                <span>已选"{{size}}""图片色"</span>
+                                <span>已选"{{size}}""{{color}}"</span>
                             </div>
                             <i class="mint-cell-allow-close"></i>
                         </div>
@@ -331,6 +358,7 @@
                 </div>
             </template>
         </mt-popup>
+        
     </div>    
 </template>
 <script>
@@ -349,10 +377,12 @@ Vue.component(SwipeItem.name, SwipeItem);
 Vue.component(Cell.name, Cell);
 Vue.component(Popup.name, Popup);
 Vue.component(Toast.name, Toast);
+import Comments from '../component/comments.vue'
 export default {
     data() {
         return{
             isHeaderShow:false,
+            hasCommentHead:false,
             index:1,
             popupVisible:false,
             coverType: 0,
@@ -363,8 +393,17 @@ export default {
             isActive:'s',
             size: 's',
             count: '1',
-            scroll: ''
+            color: '图片色',
+            scroll: '',
+            commentPopup:false,
+            ismodal:false,
+            go_comment: 1,
+            userInfo: this.$store.state.userInfo,
+            cartCount: this.$store.getters.cartCount
         }
+    },
+    components: {
+        Comments : Comments
     },
     computed: {
         imgsUrl() {
@@ -385,8 +424,18 @@ export default {
             this.popupVisible = true;
             this.coverType = type;
         },
+        getComments() {
+            this.commentPopup = true;
+            this.hasCommentHead = true;
+            this.isHeaderShow = false;
+        },
         closeCover() {
             this.popupVisible = !this.popupVisible;
+        },
+        closeComment(){
+            this.hasCommentHead = false;
+            this.commentPopup = false;
+            this.isHeaderShow = true;
         },
         selectSize(size){
             this.isActive = size;
@@ -401,11 +450,38 @@ export default {
             if(this.count>999) this.count = 999;
         },
         addOk() {
-            Toast({
-                message:'添加成功',
-                duration: 2000
-            });
-            this.popupVisible = !this.popupVisible;
+            //判断用户是否登录
+
+            if(this.userInfo.username !== undefined){
+                let cartInfo = {
+                    goodsName: this.goodsInfo.goodsName,
+                    goodsId: this.goodsInfo.goodsID,
+                    goodsUrl: this.goodsInfo.goodsListImg,
+                    size: this.size,
+                    color: this.color,
+                    count: this.count,
+                    price: parseInt((this.goodsInfo.price/100)*80),
+                    isModify: true,
+                    isSeleted: true,
+                }
+                console.log(cartInfo)
+                this.$store.commit('SAVE_CART_LIST',Object.assign({},cartInfo))
+                Toast({
+                    message:'添加成功',
+                    duration: 2000
+                });
+                this.popupVisible = !this.popupVisible;
+            }else{
+                Toast({
+                    message:'请先登录',
+                    duration: 2000
+                });
+                this.$store.commit('setPageName','/product-detail')
+                this.$router.push({path:'/login'})
+                
+            }
+
+            
         },
         menu() {
             this.scroll = document.body.scrollTop;
@@ -416,7 +492,15 @@ export default {
             if(curp == '/goods-list') {
                  this.$router.push({name: 'goodslist',query:{"list":this.goodsList}})
             }
+        },
+        goComment() {
+            ++this.go_comment
+        },
+        go_cart () {
+            this.$router.push({name: 'cart'})
+            this.$store.commit('setPageName','/product-detail')
         }
+
     }
 }
 </script>
@@ -432,7 +516,14 @@ export default {
         position: absolute;
         top: 0;
         left: 0;
-        background: rgba(245, 86, 198, 0.93);
+        background: rgba(245, 86, 198,1);
+    }
+    .mint-popup.mint-popup-right{
+        width: 100%;
+        height: 100%;
+        z-index: 0!important;
+        padding: .4rem 0;
+        overflow-y: scroll;
     }
 </style>
 

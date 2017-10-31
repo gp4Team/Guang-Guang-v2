@@ -45,7 +45,8 @@ export default new Router({
     },
     {
       path: '/cart',
-      component: Cart
+      component: Cart,
+      name: 'cart'
     },
     {
       path: '/goods-list',
@@ -55,24 +56,25 @@ export default new Router({
     {
       path: '/home',
       component: Home,
+      redirect: '/login',
       children: [
 		    {
-			    	 path: 'login',
+			    	 path: '/login',
 						 name:'login', 
 			      component:Login
 			  },
 		    {
-			      path: 'register',
+			      path: '/register',
 						 name:'register', 
 			      component: Register
 				},
 			  {
-			      path: 'findPsd',
+			      path: '/findPsd',
 			      name:'findPsd',
 			      component: FindPsd 
 			  },
 			   {
-			      path: 'mine',
+			      path: '/mine',
 			      name:'mine',
 			      component: Mine 
 			  }

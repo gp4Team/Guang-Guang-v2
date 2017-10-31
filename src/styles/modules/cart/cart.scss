@@ -2,11 +2,184 @@
     font-family: 'yofont';
     src: url('../assets/images/iconfont/iconfont3.woff') format('woff'), url('../assets/images/iconfont/iconfont3.ttf') format('truetype')
   }
+  %centers {
+    @include flexbox();
+    @include justify-content(space-between);
+    @include align-items();
+  }
 .m-index{
+    @font-face {
+        font-family: 'yofont';
+        src: url('../assets/images/iconfont/iconfont3.woff') format('woff'), url('../assets/images/iconfont/iconfont3.ttf') format('truetype')
+      }
     .cart-top{
         height: .4rem;
         .mint-header{
             background-color: #ff26bc !important;
+            h1{
+                width: 100%;
+                text-align: center;
+            }
+        }
+    }
+    section{
+        ul{
+            width: 100%;
+            color: #8c8c8c;
+            font-size: .13rem;
+            i{
+                font-size: .16rem;
+                margin-right: .1rem;
+                &.red{
+                    color: red;
+                }
+            }
+            li{
+                overflow: hidden;
+                background: #fff;
+                margin-bottom: .05rem;
+                .shop{
+                    padding: .05rem .1rem;
+                    @include flexbox();
+                    @include align-items();
+                    @include border(0 0 1px 0);
+                }
+                .mint-cell{
+                    height: 1rem;
+                    .mint-cell-swipe-button{
+                        @include flexbox();
+                        @include justify-content();
+                        @include align-items();
+                    }
+                    .mint-cell-wrapper{
+                        height: 100%;
+                        padding-right: 0;
+                        .mint-cell-value{
+                            width: 100%;
+                            height: 100%;
+                            .center{
+                                width:.8rem;
+                                height: .8rem;
+                                margin-right:.1rem;
+                                img{
+                                    width: .8rem;
+                                    height: .8rem;
+                                }
+                            }
+                            .right{
+                                height: .96rem;
+                                font-size: .12rem;
+                                @include flexbox();
+                                // padding-right: .1rem;
+                                @include flex();
+                                @include flex-direction(column);
+                                @include justify-content(space-around);
+                                .name{
+                                    @include flexbox();
+                                    @include justify-content(space-between);
+                                    p{
+                                        line-height: .18rem;
+                                        width: 1.5rem;
+                                        color: #666;
+                                    }
+                                }
+                                .gray{
+                                    font-size: .14rem;
+                                    transform-origin: 0 0;
+                                    transform: scale(.8);
+                                }
+                                .price{
+                                    width: 100%;
+                                    @include flexbox();
+                                    padding-right: .1rem;
+                                    @include justify-content(space-between);
+                                    .red{
+                                        color: red;
+                                    }
+                                }
+                                .modifyP{
+                                    height: 100%;
+                                    padding-left: .2rem;
+                                    @include flexbox();
+                                    @include justify-content(space-between);
+                                    @include align-items();
+                                    .cal{
+                                        width: .8rem;
+                                        height: .24rem;
+                                        line-height: .24rem;
+                                        text-align: center;
+                                        input,span,span{
+                                            display: inline-block;
+                                            width: .24rem;
+                                            height: .24rem;
+                                            outline: none;
+                                            border: none;
+                                            border: 1px solid #f1f1f1;
+                                            text-align: center;
+                                        }  
+                                        input{
+                                            font-weight: 500;
+                                            color: #666;
+                                        } 
+                                        span{
+                                            color: #adacac;
+                                            font-weight: 500;
+                                            // font-size: .13rem;
+                                        }
+                                    }
+                                    .modifyOk{
+                                        height: 100%;
+                                        background: #ff692e;
+                                        width: .5rem;
+                                        @include flexbox();
+                                        @include justify-content();
+                                        @include align-items();
+                                        font-size: .14rem;
+                                        color: #fff;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+                
+            }
+            
+        }
+    }
+    .total-bar{
+        @extend %centers;
+        height: .4rem;
+        align-items: center;
+        .allSelect{
+            width: 20%;
+            padding: .07rem;
+            @extend %centers;
+            span{
+                font-size: .13rem;
+                color: #666;
+            }
+        }
+        .totals{
+            width: 55%;
+            @extend %centers;
+            height: 100%;
+            .btn{
+                height: 100%;
+                @extend %centers;
+                background: #ff692e;
+                @include justify-content();
+                color: #fff;
+                font-weight: 300;
+                font-size: .13rem;
+                width: .9rem;
+            }
+        }
+        i.red{
+            color: #ff4040;
+        }
+        i.gray{
+            color: #c3c3c3;
         }
     }
     
