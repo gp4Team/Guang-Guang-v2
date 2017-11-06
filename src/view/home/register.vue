@@ -113,18 +113,29 @@
 		methods: {
 			check:function(){
 				let that = this;
-				if( this.isUserName&& this.isUserPwd ){
-					axios.get(`/api/AjaxPage.ashx?type=2&&tel=${this.userName}&pwd=${this.userPwd}&phone=${this.userPhone}`)
+				if( this.isUserName && this.isUserPwd ){
+					axios.post('/ggserver/api/users/register',{
+						userName: this.userName,
+						userPwd: this.userPwd,
+						userPhone: this. userPhone
+					})
 					.then(function(res){
-					   if(res.data == '注册成功'){
-						//    alert(res.data);
-						   Toast({
-								message:'注册成功',
+						//console.log(res.data.data.success)
+					  if(res.data.data.success){
+							Toast({
+								message:'注册成功,请登录',
 								duration: 2000
 							});
-					   		that.$router.push({'name':'login'});
-					   }
+							that.$router.push({path: '/login'})
+						}else{
+							Toast({
+								message:'该用户名已存在',
+							});
+						}
 					})
+					.catch(function(err){
+					  console.log(err);
+					})	
 				}
 			}
 		},

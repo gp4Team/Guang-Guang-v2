@@ -94,10 +94,12 @@
 					userpwd: this.userPwd
 				}
 				if( this.isUserName && this.isUserPwd){
-					axios.get(`/api/AjaxPage.ashx?type=3&&username=${this.userName}&pwd=${this.userPwd}`)
-					.then(function( res){
-						if(res.data == '登录成功!'){
-							// alert(res.data);
+					axios.post('/ggserver/api/users/login',{
+						userName: this.userName,
+						userPwd: this.userPwd
+					})
+					.then(function( res){						
+						if(res.data.data.success){
 							Toast({
 								message:'登录成功',
 								duration: 2000
@@ -110,8 +112,16 @@
 							}else{
 								that.$router.push({'name':'mine'});
 							}
+						}else{
+							Toast({
+								message:'用户不存在，请先注册',
+								//duration: 2000
+							});
 						}
 					})
+					.catch(function(err){
+					  console.log(err);
+					})	
 				}
 			}
 		}
