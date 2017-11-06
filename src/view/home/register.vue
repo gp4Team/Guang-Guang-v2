@@ -114,10 +114,11 @@
 			check:function(){
 				let that = this;
 				if( this.isUserName && this.isUserPwd ){
-					axios.post('/ggserver/api/users/register',{
-						userName: this.userName,
-						userPwd: this.userPwd,
-						userPhone: this. userPhone
+					axios.post('/ggserver/api/users/signUp',{
+						username: this.userName,
+						password: this.userPwd,
+						userPhone: this. userPhone,
+						roles: 1
 					})
 					.then(function(res){
 						//console.log(res.data.data.success)

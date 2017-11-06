@@ -94,12 +94,13 @@
 					userpwd: this.userPwd
 				}
 				if( this.isUserName && this.isUserPwd){
-					axios.post('/ggserver/api/users/login',{
-						userName: this.userName,
-						userPwd: this.userPwd
+					axios.post('/ggserver/api/users/signIn',{
+						username: this.userName,
+						password: this.userPwd
 					})
-					.then(function( res){						
-						if(res.data.data.success){
+					.then(function( res){	
+						//console.log(res.data.data.login)
+						if(res.data.data.login){
 							Toast({
 								message:'登录成功',
 								duration: 2000
