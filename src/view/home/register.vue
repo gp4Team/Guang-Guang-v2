@@ -1,7 +1,7 @@
 <template lang="html">
 	<div class="m-register">
 		<div class="register-head">
-			<router-link to="/home/login" tag='i' class="mintui mintui-back"></router-link>
+			<router-link to="/login" tag='i' class="mintui mintui-back"></router-link>
 			<span>注&nbsp;册</span>
 		</div>
 		<div class="register-logo"><img src="http://m.86gg.cn/img/logo.png" />
@@ -12,7 +12,7 @@
 				<label><i  class="yo-ico">&#xe64e;</i><input type="password" v-model="userPwd" placeholder="输入密码"/></label>
 				<label><i class="yo-ico">&#xe655;</i><input type="text"  v-model="userPhone" placeholder="输入推荐人手机"/></label>
 			</div>
-			<button v-on:click="check()">注册</button>
+			<button v-on:click.prevent="check">注册</button>
 			<div class="a-link">
 				<router-link to="/home/login" tag='a'>
 					<i class="yo-ico">&#xe651;</i>用户登陆
@@ -35,6 +35,8 @@
 	import Vue from 'vue'
 	import axios from 'axios'
 	import VueRouter from 'vue-router'
+	import { Toast } from 'mint-ui';
+	Vue.component(Toast.name, Toast);
 	export default {
 		data() {
 			return {
@@ -111,14 +113,30 @@
 		methods: {
 			check:function(){
 				let that = this;
-				if( this.isUserName&& this.isUserPwd ){
-					axios.get(`/api/AjaxPage.ashx?type=2&&tel=${this.userName}&pwd=${this.userPwd}&phone=${this.userPhone}`)
-					.then(function(res){
-						 alert(res.data);
-					   if(res.data == '注册成功'){
-					   		that.$router.push({'name':'login'});
-					   }
+				if( this.isUserName && this.isUserPwd ){
+					axios.post('/ggserver/api/users/signUp',{
+						username: this.userName,
+						password: this.userPwd,
+						// userPhone: this. userPhone,
+						roles: 1
 					})
+					.then(function(res){
+						//console.log(res.data.data.success)
+					  if(res.data.data.success){
+							Toast({
+								message:'注册成功,请登录',
+								duration: 2000
+							});
+							that.$router.push({path: '/login'})
+						}else{
+							Toast({
+								message:'该用户名已存在',
+							});
+						}
+					})
+					.catch(function(err){
+					  console.log(err);
+					})	
 				}
 			}
 		},

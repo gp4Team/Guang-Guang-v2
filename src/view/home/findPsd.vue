@@ -1,7 +1,7 @@
 <template lang="html">
 	<div class="m-findPsd">
 		<div class="findPsd-head">
-			<router-link to="/home/register" tag='i' class="mintui mintui-back"></router-link>
+			<router-link to="/register" tag='i' class="mintui mintui-back"></router-link>
 			<span>找回密码</span>
 		</div>
 		<div class="findPsd-logo"><img src="http://m.86gg.cn/img/logo.png" />
@@ -12,8 +12,8 @@
 				<label><i  class="yo-ico">&#xe64e;</i><input type="password" v-model="userPwd" placeholder="输入手机获取的密码"/></label>
 			</div>
 			<div class="btn">
-				<button v-on:click="check()">获取验证码</button>
-				<router-link to="/home/login" tag='button'>
+				<button v-on:click.prevent="check">获取验证码</button>
+				<router-link to="/login" tag='button'>
 					登陆
 				</router-link>
 			</div>
@@ -27,6 +27,8 @@
 <script>
 	import Vue from 'vue'
 	import axios from 'axios'
+	import { Toast } from 'mint-ui';
+	Vue.component(Toast.name, Toast);
 	export default {
 		data() {
 			return {
@@ -68,7 +70,11 @@
 				if(this.isUserPhone){
 					axios.get(`/api/AjaxPage.ashx?type=9&&tel=${this.userPhone}`)
 					.then(function( res){
-						alert(res.data);
+						// alert(res.data);
+						Toast({
+							message:'短信发送成功！',
+							duration: 2000
+						});
 						if(res.data == '短信发送成功！' && isuserPwd){
 								that.$router.push({'name':'mine'});
 						}					

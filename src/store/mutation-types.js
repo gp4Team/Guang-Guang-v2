@@ -5,3 +5,5 @@ export const SAVE_PRO_LIST = 'SAVE_PRO_LIST'
 export const GET_PRO_DETAIL = 'GET_PRO_DETAIL'
 //评论列表
 export const GET_COMMENTS_LIST = 'GET_COMMENTS_LIST'
+//购物车列表
+export const SAVE_CART_LIST = 'SAVE_CART_LIST'

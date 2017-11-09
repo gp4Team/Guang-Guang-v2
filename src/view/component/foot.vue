@@ -17,7 +17,7 @@
               <i class="yo-ico">&#xe60c;</i>
               <b>购物车</b>
           </router-link>
-          <router-link to="/home/login" tag='li'>
+          <router-link to="/home" tag='li'>
               <i class="yo-ico">&#xe625;</i>
               <b>我的</b>
           </router-link>

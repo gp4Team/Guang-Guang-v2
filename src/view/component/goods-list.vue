@@ -66,13 +66,6 @@ export default {
                 selectText: this.content
             }
             this.sorttype = 0;
-            this.$jsonp('http://datainfo.duapp.com/shopdata/selectGoodes.php',params).then( data => {
-                
-                this.$store.dispatch({
-                    type: 'getProlist',
-                    productslist: data
-                })
-            })
             
         },
         sortByType(type) {

@@ -116,7 +116,6 @@ export default {
           }else{
               var hasPraise = this.comList[type].reviewList[index].isPraise == true?false:true;
               if(isPraised === 0){
-                  debugger
                   this.$set(this.comList[type].reviewList,Object.assign(this.comList[type].reviewList[index],{isPraise:!hasPraise,praiseCount:++this.comList[type].reviewList[index].praiseCount}))
               }else{
                   this.$set(this.comList[type].reviewList,Object.assign(this.comList[type].reviewList[index],{isPraise:hasPraise,praiseCount:--this.comList[type].reviewList[index].praiseCount}))

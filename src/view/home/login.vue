@@ -8,14 +8,14 @@
 				<label><i  class="yo-ico">&#xe7b9;</i><input   type="password" v-model="userPwd" placeholder="输入密码"/></label>
 			</div>
 
-			<button v-on:click="check()">
+			<button v-on:click.prevent="check">
         		登陆
         	</button>
 			<div class="a-link">
-				<router-link to="/home/register" tag='a'>
+				<router-link to="/register" tag='a'>
 					<i class="yo-ico">&#xe651;</i>用户注册
 				</router-link>
-				<router-link to="/home/findPsd" tag='a'>
+				<router-link to="/findPsd" tag='a'>
 					忘记密码<i class="yo-ico">&#xe61a;</i>
 				</router-link>
 			</div>
@@ -30,6 +30,8 @@
 <script>
 	import Vue from 'vue'
 	import axios from 'axios'
+	import { Toast } from 'mint-ui';
+	Vue.component(Toast.name, Toast);
 	export default {
 		data() {
 			return {
@@ -87,14 +89,39 @@
 		methods:{
 			check:function(){
 				let that = this;
-				if( this.isUserName&& this.isUserPwd){
-					axios.get(`/api/AjaxPage.ashx?type=3&&username=${this.userName}&pwd=${this.userPwd}`)
-					.then(function( res){
-						alert(res.data);
-						if(res.data == '登录成功!'){
-							that.$router.push({'name':'mine'});
+				let userInfo = {
+					username: this.userName,
+					userpwd: this.userPwd
+				}
+				if( this.isUserName && this.isUserPwd){
+					axios.post('/ggserver/api/users/signIn',{
+						username: this.userName,
+						password: this.userPwd
+					})
+					.then(function( res){	
+						if(res.data.data.login){
+							Toast({
+								message:'登录成功',
+								duration: 2000
+							});
+							//将用户信息存到vuex
+							that.$store.commit('getUserInfo',res.data.data)
+
+							if(that.$store.state.currentPage == '/product-detail'){
+								that.$router.push({path: '/product-detail'})
+							}else{
+								that.$router.push({'name':'mine'});
+							}
+						}else{
+							Toast({
+								message:'用户不存在，请先注册',
+								//duration: 2000
+							});
 						}
 					})
+					.catch(function(err){
+					  console.log(err);
+					})	
 				}
 			}
 		}

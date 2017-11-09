@@ -14,6 +14,22 @@
         overflow-y: scroll;
         section{
             height: 100%;
+            span.cartCount{
+                display: inline-block;
+                width: .15rem;
+                height: .15rem;
+                border-radius: 50%;
+                background: red;
+                text-align: center;
+                line-height: .15rem;
+                position: absolute;
+                z-index: 1;
+                right: .35rem;
+                i{
+                    font-size: .12rem;
+                    transform: scale(.6);
+                }
+            }
             .gooddetail{
                 height: 3.2rem;
                 width: 100%;
@@ -402,7 +418,7 @@
                             padding: 0 .1rem;
                             border-radius: .1rem;
                         }
-                        &.size{
+                        &.size,&.color{
                             span{
                                 height: .3rem;
                                 line-height: .3rem;

@@ -5,7 +5,7 @@
 	    		<span><i class="yo-ico">&#xe7a0;</i></span>
 	    		<div class="my-image">
 	    			<div class="head-portrait"><img src="../../assets/images/menu/m1.png"/></div>
-	    			<div class="my-name">13298479590</div>
+	    			<div class="my-name">{{username}}</div>
 	    		</div>
 	    		<span><i class="yo-ico">&#xf0058;</i></span>
 	    	</div>
@@ -34,9 +34,19 @@
 	    </div>
   	</div>
 </template>
-
 <script>
+export default {
+  data() {
+	  return {
+		  username: this.$store.state.userInfo.username
+	  }
+  },
+  methods: {
+
+  }
+}
 </script>
+
 
 <style>
 </style>
