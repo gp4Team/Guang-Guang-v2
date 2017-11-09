@@ -82,7 +82,9 @@
             <main-classify></main-classify>
             <div class="products">
                 <p>艺术品专卖</p>
-                <products-list :sort-type = '0'></products-list>
+                <mt-loadmore :top-method="loadTop" :bottom-method="loadBottom" :bottom-all-loaded="allLoaded" ref="loadmore">
+                    <products-list :sort-type = '0'></products-list>
+                </mt-loadmore>
             </div>
         </div>
     </div>
@@ -93,12 +95,16 @@ import Carousel from '../component/carousel.vue'
 import ProductsList from '../component/products-list.vue'
 import MainClassify from '../component/main-classify.vue'
 import Vue from 'vue'
+import axios from 'axios'
 
 export default {
     data() {
         return {
             hasLoading:true,
-            goodsList:[]
+            goodsList:[],
+            currentPage:1,
+            searchWord: '',
+            allLoaded: false
         }
     },
     components: {
@@ -107,23 +113,41 @@ export default {
         ProductsList: ProductsList,
     },
     mounted() {
-        this.$jsonp('http://datainfo.duapp.com/shopdata/getGoods.php').then( data => {
-            const list = data
-            this.goodsList = list
-            this.hasLoading = false
-            // 将数据存到仓库
-            // this.$store.commit('getGoodsList',this.goodsList)
-            //actions
-            this.$store.dispatch({
-                type: 'getProlist',
-                productslist: this.goodsList
-            })
-            this.$store.commit('setPageName','/main')
-            //
-        })
+        this.getProList()
     },
     methods: {
-        
+        getProList(currentPage){
+            let params = { "pageNo" : currentPage || 1,searchWord: this.searchWord}
+            let that = this
+            axios.get('/ggserver/api/products/list',{params})
+                .then(function(res){
+                const list = res.data.content.data.page.result
+                for(let i in list){
+                    list[i].goodsId = list[i]._id
+                    that.goodsList.push(list[i])
+                }
+                console.log(that.goodsList)
+                that.hasLoading = false
+                // 将数据存到仓库
+                // this.$store.commit('getGoodsList',this.goodsList)
+                //actions
+                that.$store.dispatch({
+                    type: 'getProlist',
+                    productslist: that.goodsList
+                })
+                that.$store.commit('setPageName','/main')
+                  
+            })
+        },
+        loadTop() {
+            this.$refs.loadmore.onTopLoaded();
+        },
+        loadBottom() {
+            this.currentPage++
+            this.getProList(this.currentPage)
+            this.allLoaded = true;// 若数据已全部获取完毕
+            this.$refs.loadmore.onBottomLoaded(); 
+        },
     }
 }
 </script>

@@ -94,24 +94,34 @@
 					userpwd: this.userPwd
 				}
 				if( this.isUserName && this.isUserPwd){
-					axios.get(`/api/AjaxPage.ashx?type=3&&username=${this.userName}&pwd=${this.userPwd}`)
-					.then(function( res){
-						if(res.data == '登录成功!'){
-							// alert(res.data);
+					axios.post('/ggserver/api/users/signIn',{
+						username: this.userName,
+						password: this.userPwd
+					})
+					.then(function( res){	
+						if(res.data.data.login){
 							Toast({
 								message:'登录成功',
 								duration: 2000
 							});
 							//将用户信息存到vuex
-							that.$store.commit('getUserInfo',userInfo)
+							that.$store.commit('getUserInfo',res.data.data)
 
 							if(that.$store.state.currentPage == '/product-detail'){
 								that.$router.push({path: '/product-detail'})
 							}else{
 								that.$router.push({'name':'mine'});
 							}
+						}else{
+							Toast({
+								message:'用户不存在，请先注册',
+								//duration: 2000
+							});
 						}
 					})
+					.catch(function(err){
+					  console.log(err);
+					})	
 				}
 			}
 		}

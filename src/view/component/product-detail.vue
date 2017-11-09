@@ -88,8 +88,7 @@
                         </div> 
                     </header>
                     <mt-swipe :show-indicators="false" @change="handleChange" :auto="3000">
-                        <mt-swipe-item v-for="(item,i) in imgsUrl" v-bind:key="i"><img :src="item" alt=""></mt-swipe-item>
-                        <span class="pagenation">{{index}}/{{imgsUrl.length}}</span>
+                        <mt-swipe-item><img :src="goodsInfo.goodsListImg" alt=""></mt-swipe-item>
                     </mt-swipe>
                     <div class="info">
                         <div class="info-name">
@@ -192,7 +191,8 @@
                     </div>
                     <div class="fenge"><b></b><span>详情</span><b></b></div>
                     <div class="detailInfo">
-                        <img v-for="(item,i) in imgsUrl" v-bind:key="i" :src="item" alt="">
+                        <!-- <img v-for="(item,i) in imgsUrl" v-bind:key="i" :src="item" alt=""> -->
+                        <img :src="goodsInfo.goodsListImg" alt="">
                     </div>
                 </div>
                 <mt-popup class="commentPop" v-model="commentPopup" :modal=false position="right">
@@ -302,17 +302,13 @@
                             <i class="mint-cell-allow-close"></i>
                         </div>
                         <ul class="class">
-                            <li>
+                            <li class="color">
                                 <p class="title">颜色分类</p>
-                                <span class="mint-badge is-size-small is-error">图片色</span>
+                                <span @click="selectColor(item)" :class="{'active':isActiveColor === item}" v-for="(item, index) in goodsInfo.dynamicTagsColor" :key="index">{{item}}</span>
                             </li>
                             <li class="size">
                                 <p class="title">尺码</p>
-                                <span @click="selectSize('s')" :class="{'active':isActive === 's'}">S</span>
-                                <span @click="selectSize('m')" :class="{'active':isActive === 'm'}">M</span>
-                                <span @click="selectSize('l')" :class="{'active':isActive === 'l'}">L</span>
-                                <span @click="selectSize('xl')" :class="{'active':isActive === 'xl'}">XL</span>
-
+                                <span @click="selectSize(item)" :class="{'active':isActiveSize === item}" v-for="(item, index) in goodsInfo.dynamicTagsSize" :key="index">{{item}}</span>
                             </li>
                             <li class="addc">
                                 <span>购买数量</span>
@@ -369,6 +365,7 @@ import { Cell } from 'mint-ui';
 import { Popup } from 'mint-ui';
 import { Toast } from 'mint-ui';
 import Vue from 'vue'
+import axios from 'axios'
 Vue.component(Header.name, Header);
 Vue.component(Navbar.name, Navbar);
 Vue.component(TabItem.name, TabItem);
@@ -386,14 +383,14 @@ export default {
             index:1,
             popupVisible:false,
             coverType: 0,
-            isActive:true,
-            goodsID: this.$route.query.goodsID,
+            isActiveSize: true,
+            isActiveColor: true,
+            goodsId: this.$route.query.goodsId,
             goodsList: this.$store.state.goodsList,
             goodsInfo: this.$store.state.productDetail.productInfo.productInfo,
-            isActive:'s',
-            size: 's',
+            size: '',
             count: '1',
-            color: '图片色',
+            color: '',
             scroll: '',
             commentPopup:false,
             ismodal:false,
@@ -407,7 +404,7 @@ export default {
     },
     computed: {
         imgsUrl() {
-            return JSON.parse(this.goodsInfo.imgsUrl)
+            return eval(this.goodsInfo.imgsUrl)
         } 
     },
     mounted() {
@@ -438,8 +435,12 @@ export default {
             this.isHeaderShow = true;
         },
         selectSize(size){
-            this.isActive = size;
+            this.isActiveSize = size;
             this.size = size;
+        },
+        selectColor(color){
+            this.isActiveColor = color;
+            this.color = color;
         },
         reduce() {
             this.count--;
@@ -451,11 +452,10 @@ export default {
         },
         addOk() {
             //判断用户是否登录
-
             if(this.userInfo.username !== undefined){
                 let cartInfo = {
                     goodsName: this.goodsInfo.goodsName,
-                    goodsId: this.goodsInfo.goodsID,
+                    goodsId: this.goodsInfo.goodsId,
                     goodsUrl: this.goodsInfo.goodsListImg,
                     size: this.size,
                     color: this.color,
@@ -465,12 +465,22 @@ export default {
                     isSeleted: true,
                 }
                 console.log(cartInfo)
+                // 加入购物车
                 this.$store.commit('SAVE_CART_LIST',Object.assign({},cartInfo))
-                Toast({
+                let cartParam = {
+                    userId : this.userInfo.userId,
+                    username: this.userInfo.username,
+                    cartInfo:cartInfo
+                }
+                axios.post('ggserver/api/cart/userCartAdd',cartParam)
+                .then((res)=>{
+                    console.log(res)
+                    Toast({
                     message:'添加成功',
-                    duration: 2000
-                });
-                this.popupVisible = !this.popupVisible;
+                        duration: 2000
+                    });
+                    this.popupVisible = !this.popupVisible;
+                })
             }else{
                 Toast({
                     message:'请先登录',
@@ -478,10 +488,7 @@ export default {
                 });
                 this.$store.commit('setPageName','/product-detail')
                 this.$router.push({path:'/login'})
-                
             }
-
-            
         },
         menu() {
             this.scroll = document.body.scrollTop;
@@ -497,7 +504,7 @@ export default {
             ++this.go_comment
         },
         go_cart () {
-            this.$router.push({name: 'cart'})
+            this.$router.push({name: 'cart',query:{userId: this.userInfo.userId}})
             this.$store.commit('setPageName','/product-detail')
         }
 

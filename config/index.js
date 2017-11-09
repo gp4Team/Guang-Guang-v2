@@ -32,13 +32,13 @@ module.exports = {
     assetsSubDirectory: 'static',
     assetsPublicPath: '/',
     proxyTable: {
-      '/api': {
-        target: 'http://m.86gg.cn/',
-        changeOrigin: true,
-        pathRewrite: {
-          '^/api': ''
-        }
-      },
+	     '/ggserver': {
+	        target:'http://localhost:3000/',
+	        changeOrigin:true,
+	        pathRewrite:{
+	          '^/ggserver':''
+	        }
+	     },
       '/vip': {
         target: 'http://localhost:6000/',
         // target: 'http://10.9.164.7:6000/',

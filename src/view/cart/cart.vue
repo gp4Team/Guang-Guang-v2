@@ -64,6 +64,7 @@ import Vue from 'vue'
 import Foot from '../component/foot.vue'
 import { Header } from 'mint-ui';
 Vue.component(Header.name, Header);
+import axios from 'axios'
 import { CellSwipe } from 'mint-ui';
 
 Vue.component(CellSwipe.name, CellSwipe);
@@ -74,17 +75,39 @@ export default {
         isSeletedAll: true,
         isShowBack: this.$store.state.currentPage == '/product-detail',
         totailCount:0,
-        totail:0
+        totail:0,
+        cartList:[],
+        userId: this.$route.query.userId
     }
   },
-  computed:{
-      cartList(){
-          return this.$store.state.cartList.cartList;
-      }
-  },
-  methods : {
+//   computed:{
+//       cartList(){
+//           return this.$store.state.cartList.cartList;
+//       }
+//   },
+    mounted(){
+        this.getCartList()
+    },
+    methods : {
+        getCartList(){
+            let params = { userId: this.userId}
+            console.log(this.userId)
+            let that = this
+            axios.get('ggserver/api/cart/userCartList', {params})
+            .then((res) => {
+                that.cartList = res.data.content.data.cartInfo.cartInfoList
+            })
+        },
         deletePro(index){
-            this.$store.state.cartList.cartList.splice(index,1)
+            // this.$store.state.cartList.cartList.splice(index,1)
+            let params = { index: index, userId: this.userId}
+            console.log(index)
+            let that = this
+            axios.get('ggserver/api/cart/userCartDelOne', {params})
+            .then((res) => {
+                console.log(res)
+                that.getCartList()
+            })
         },
         modify(item,index) {
             this.count = item.count;
@@ -102,10 +125,18 @@ export default {
         },
         modifyOk(item,index) {
             this.$set(this.cartList,Object.assign(this.cartList[index],{isModify:!this.cartList[index].isModify}))
-            this.$store.state.cartList.cartList[index].count = this.count;
-            this.$store.state.cartList.cartList.map((item)=>item.isSeleted = true)
+            this.cartList[index].count = this.count;
+            this.cartList.map((item)=>item.isSeleted = true)
             this.totail = 0
             this.totailCount = 0
+            this.count = item.count;
+            let params = { index: index, userId: this.userId, count: this.count}
+            let that = this
+            axios.get('ggserver/api/cart/userCartModOne', {params})
+            .then((res) => {
+                console.log(res)
+                that.getCartList()
+            })
         },
         selected(item,index,curType) {
             this.$set(this.cartList,Object.assign(this.cartList[index],{isSeleted:!this.cartList[index].isSeleted}))
@@ -119,12 +150,12 @@ export default {
         },
         selectedAll() {
             this.isSeletedAll = !this.isSeletedAll
-            this.$store.state.cartList.cartList.map((item)=>item.isSeleted = this.isSeletedAll)
+            this.cartList.map((item)=>item.isSeleted = this.isSeletedAll)
             if(this.isSeletedAll === false){
-                let list = this.$store.state.cartList.cartList
-                for(let i in this.$store.state.cartList.cartList){
-                    this.totail += Number(this.$store.state.cartList.cartList[i].price) * Number(this.$store.state.cartList.cartList[i].count)
-                    this.totailCount += Number(this.$store.state.cartList.cartList[i].count) 
+                let list = this.cartList
+                for(let i in this.cartList){
+                    this.totail += Number(this.cartList[i].price) * Number(this.cartList[i].count)
+                    this.totailCount += Number(this.cartList[i].count) 
                 }
             }else{
                 this.totail = 0

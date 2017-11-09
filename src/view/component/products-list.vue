@@ -1,6 +1,6 @@
 <template lang="html">
   <div class="">
-      <mt-loadmore :top-method="loadTop" :bottom-method="loadBottom" :bottom-all-loaded="allLoaded" ref="loadmore">
+      
             <transition-group id="prolist" name="flip-list" tag="ul">
                 <li @click="gotoDetail(items)" v-for="(items,index) in products" :key="index">
                     <img v-lazy.container="items.goodsListImg"/>
@@ -11,7 +11,7 @@
                     </div>
                 </li>
             </transition-group>
-      </mt-loadmore>  
+      <!-- </mt-loadmore>   -->
   </div>
 </template>
 <script>
@@ -30,7 +30,7 @@ export default {
   },
   data() {
       return {
-           allLoaded:false,
+        //    allLoaded:false,
       }
   },
   computed:{
@@ -38,18 +38,7 @@ export default {
         return this.$store.getters.realList(this.sortType)
     }
   },
-  mounted() {
-    //   this.products = this.$store.getters.realList(this.sortType)
-  },
-  //******* */
   methods : {
-        loadTop() {
-            this.$refs.loadmore.onTopLoaded();
-        },
-        loadBottom() {
-            this.allLoaded = true;// 若数据已全部获取完毕
-            this.$refs.loadmore.onBottomLoaded();
-        },
         gotoDetail(info) {
             this.$store.commit({
                 type: 'GET_PRO_DETAIL',
